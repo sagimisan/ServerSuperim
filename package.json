@@ -1,0 +1,25 @@
+{
+  "name": "superim",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "fs": "^0.0.1-security",
+    "puppeteer": "^13.4.0",
+    "socket.io": "^4.4.1",
+    "ws": "^8.5.0",
+    "mongodb":"^4.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.21",
+    "@types/ws": "^8.5.2"
+
+  }
+}

@@ -1,7 +1,7 @@
 export interface userProfileData {
   name: string;
-  lastName: string;
+  email: string;
   grade: string;
   rate: number;
-  hourPrice:number
-  }
+  hourPrice: number;
+}

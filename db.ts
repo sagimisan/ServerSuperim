@@ -55,16 +55,14 @@ export default class db {
       })
   }
   //getting array with the prev user data [0] and the new [1]
-  public static async updateUserData(value:any) {
+  public static async updateUserData(value:userProfileData[]) {
     await client.connect();
-    var dbo = client.db("usersData");
-    console.log(value[0],value[1]);
-    
-    var myquery = value[0];
-    var newvalues = { $set: { name:value[1].name,lastName:value[1].lastName,hourPrice:value[1].hourPrice} };
-    dbo.collection("users").updateOne(myquery, newvalues, function (err:any, res:any) {
+    var dbo = client.db("usersData");    
+    var myquery = value[0].email;
+    var newvalues = { $set: { name:value[1].name,hourPrice:value[1].hourPrice} };
+    dbo.collection("users").updateOne({email:myquery}, newvalues, function (err:any, res:any) {
       if (err) throw err;
-      console.log("1 document updated",res);
+      console.log("1 document updated");
     });
   }
 }

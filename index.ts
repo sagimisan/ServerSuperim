@@ -7,6 +7,10 @@ const SingleProScrup = require("./SingleProScrup");
 io.on("connection", (socket: any) => {
   console.log("a user connected :D");
   socket.emit('connection','connectSuccess')
+  socket.on("addShopingList", async (msg: any) => {
+    console.log(msg);
+    db.addShopingList(msg)
+  });
   socket.on("updateShopingList", async (msg: string) => {
     console.log(msg);
     db.main(msg)
@@ -17,15 +21,15 @@ io.on("connection", (socket: any) => {
     //   io.emit("getProduct", result);
     // })
   });
-  socket.on("getShoppingList", async (msg: string) => {
-    db.getShoppingList()
+  socket.on("getShoppingList", async (id: string) => {
+    db.getShoppingList(id)
   })
   socket.on("insertNewUser", async (msg: userProfileData) => {
     console.log('mgs',msg);
     db.insertNewUser(msg)
   })
-  socket.on("getUserData", async () => {    
-    db.getUserData()
+  socket.on("getUserData", async (user:userProfileData) => {    
+    db.getUserData(user)
   })
   socket.on("updateUserProfile", async (value:any) => {
     // console.log('mgs', msg);

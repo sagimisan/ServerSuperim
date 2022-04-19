@@ -35,17 +35,18 @@ export default class db {
     console.log('Connected successfully to server');
     const db = client.db(dbName);
     const collection = db.collection('lists');
-    collection.insertOne({ result })
+    collection.insertOne( result )
     // console.log('collection.find()', result);
     return 'done.';
 
   }
-  public static async getShoppingList(id:string) {
+  public static async getShoppingList(id:string) {    
     await client.connect();
     const db = client.db("shoppingLists");
-    db.collection('lists').findOne({  id:id  },
+    db.collection('lists').findOne({id},
        (err: any, result: any) => {
       if (err) throw err;
+      console.log(result);
       emit("getShoppingList", result);
     });
   }

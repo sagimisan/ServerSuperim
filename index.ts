@@ -1,12 +1,13 @@
 import db from "./db";
 import { io } from "./ioSocket";
+import SingleProScrup from "./SingleProScrup";
 import { userProfileData } from "./types";
-const SingleProScrup = require("./SingleProScrup");
 
 // app
 io.on("connection", (socket: any) => {
   console.log("a user connected :D");
   socket.emit('connection','connectSuccess')
+  
   socket.on("addShopingList", async (msg: any) => {
     console.log(msg);
     db.addShopingList(msg)
@@ -36,9 +37,10 @@ io.on("connection", (socket: any) => {
     db.updateUserData(value)
   })
   socket.on("scrap", async (msg: string) => {
+    // console.log(msg);
     SingleProScrup.proNames(msg).then((result: any) => {
       console.log('pro', result);
-      db.main(result)
+      // db.main(result)
       io.emit("getProduct", result);
     })
   });

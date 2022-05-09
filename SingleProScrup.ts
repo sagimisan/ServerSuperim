@@ -1,9 +1,10 @@
 const puppeteer = require("puppeteer")
 const fs = require("fs/promises")
 
-let productsData: any[] = []
 export default class SingleProScrup {
     public static proNames = async (msg: string) => {
+        // console.log('msg',msg);
+        let productsData: any[] = []
         const browser = await puppeteer.launch({ headless: true })
         const page = await browser.newPage()
 

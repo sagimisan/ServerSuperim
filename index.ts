@@ -11,15 +11,8 @@ io.on("connection", (socket: any) => {
     console.log(msg);
     db.addShopingList(msg)
   });
-  socket.on("updateShopingList", async (msg: string) => {
-    console.log(msg);
-    db.main(msg)
-    // db.main('')
-    // SingleProScrup.proNames(msg).then((result: any) => {
-    //   console.log('pro', result);
-    //   db.main(result)
-    //   io.emit("getProduct", result);
-    // })
+  socket.on("updateShopingList", async (objectData: any) => {
+    db.updateShoppingList(objectData.shoppingListId, objectData.shoppingList)
   });
   socket.on("getShoppingList", async (id: string) => {
     db.getShoppingList(id)
@@ -35,13 +28,13 @@ io.on("connection", (socket: any) => {
     // console.log('mgs', msg);
     db.updateUserData(value)
   })
-  socket.on("scrap", async (msg: string) => {
-    SingleProScrup.proNames(msg).then((result: any) => {
-      console.log('pro', result);
-      db.main(result)
-      io.emit("getProduct", result);
-    })
-  });
+  // socket.on("scrap", async (msg: string) => {
+  //   SingleProScrup.proNames(msg).then((result: any) => {
+  //     console.log('pro', result);
+  //     db.main(result)
+  //     io.emit("getProduct", result);
+  //   })
+  // });
 })
 // proNames("מים").then((result:any) => {
 //   console.log('pro', result);

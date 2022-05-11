@@ -8,14 +8,19 @@ const client = new MongoClient(url);
 const dbName = 'shoppingLists';
 
 export default class db {
-  public static async main(result: string) {
+  public static async updateShoppingList(shoppingListId: string, shoppingList: any) {
     // Use connect method to connect to the server
     await client.connect();
     console.log('Connected successfully to server');
+    console.log('shoppingListId ', shoppingListId, shoppingList);
     const db = client.db(dbName);
     const collection = db.collection('lists');
-    collection.insertOne({ result })
-    console.log('collection.find()', result);
+    var newvalues = { $set: {shoppingList} };
+    collection.updateOne({shoppingListId} , newvalues, function (err: any, res: any) {
+      if (err) throw err;
+      console.log("1 shopping list updated");
+    });
+    console.log('collection.find()', shoppingList);
     // the following code examples can be pasted here...
     return 'done.';
 

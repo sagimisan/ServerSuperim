@@ -6,7 +6,7 @@ const { MongoClient } = require("mongodb");
 const url = Globals.URL;
 const client = new MongoClient(url);
 // Database Name
-const dbName = 'superimDB';
+const dbName = 'userData';
 
 export default class db {
   public static async main(result: string) {

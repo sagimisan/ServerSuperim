@@ -12,18 +12,14 @@ io.on("connection", (socket: any) => {
     console.log(msg);
     db.addShopingList(msg)
   });
-  socket.on("updateShopingList", async (msg: string) => {
-    console.log(msg);
-    db.main(msg)
-    // db.main('')
-    // SingleProScrup.proNames(msg).then((result: any) => {
-    //   console.log('pro', result);
-    //   db.main(result)
-    //   io.emit("getProduct", result);
-    // })
+  socket.on("updateShopingList", async (objectData: any) => {
+    db.updateShoppingList(objectData.shoppingListId, objectData.shoppingList)
   });
   socket.on("getShoppingList", async (id: string) => {
     db.getShoppingList(id)
+  })
+  socket.on("getShoppingListByEmail", async (email: string) => {
+    db.getShoppingListByEmail(email)
   })
   socket.on("insertNewUser", async (msg: userProfileData) => {
     console.log('mgs',msg);

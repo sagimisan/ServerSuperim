@@ -56,6 +56,17 @@ export default class db {
         emit("getShoppingList", result);
       });
   }
+  public static async getShoppingListByEmail(email: string) {
+    console.log(email);
+    await client.connect();
+    const db = client.db("usersData");
+    db.collection('users').findOne({ email: email },
+      (err: any, result: any) => {
+        if (err) throw err;
+        console.log(result);
+        emit("getShoppingListByEmail", result.shoppingListId);
+      });
+  }
   public static async insertNewUser(value: userProfileData) {
     await client.connect();
     const db = client.db("usersData");

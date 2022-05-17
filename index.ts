@@ -18,6 +18,9 @@ io.on("connection", (socket: any) => {
   socket.on("getShoppingList", async (id: string) => {
     db.getShoppingList(id)
   })
+  socket.on("getShoppingListByEmail", async (email: string) => {
+    db.getShoppingListByEmail(email)
+  })
   socket.on("insertNewUser", async (msg: userProfileData) => {
     console.log('mgs',msg);
     db.insertNewUser(msg)

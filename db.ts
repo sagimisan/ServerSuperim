@@ -1,8 +1,9 @@
 import emit from "./emit";
+import { Globals } from "./Globals";
 import { userProfileData } from "./types";
 
 const { MongoClient } = require("mongodb");
-const url = 'mongodb://localhost:27017';
+const url = Globals.URL;
 const client = new MongoClient(url);
 // Database Name
 const dbName = 'shoppingLists';

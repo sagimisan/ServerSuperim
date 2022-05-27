@@ -2,9 +2,9 @@ import emit from "./emit";
 import { Globals } from "./Globals";
 import { userProfileData } from "./types";
 
-const { MongoClient } = require("mongodb");
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const url = Globals.URL;
-const client = new MongoClient(url);
+const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 // Database Name
 const dbName = 'shoppingLists';
 

@@ -6,6 +6,7 @@ import { userProfileData } from "./types";
 // app
 io.on("connection", (socket: any) => {
   console.log("a user connected :D");
+  console.log("test");
   socket.emit('connection','connectSuccess')
   
   socket.on("addShopingList", async (msg: any) => {

@@ -72,6 +72,17 @@ export default class db {
         emit("getShoppingListByEmail", result.shoppingListId);
       });
   }
+  public static async checkUserExist(email: string) {
+    console.log(email);
+    await client.connect();
+    console.log('Connected successfully to DB');
+    const db = client.db("usersData");
+    db.collection('users').findOne({ email: email },
+      (err: any, result: any) => {
+        if (err) throw err;
+        emit("checkUserExist", result!==null);
+      });
+  }
   public static async insertNewUser(value: userProfileData) {
     await client.connect();
     console.log('Connected successfully to DB');

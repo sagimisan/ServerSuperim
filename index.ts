@@ -14,6 +14,7 @@ io.on("connection", (socket: any) => {
     db.addShopingList(msg)
   });
   socket.on("updateShopingList", async (objectData: any) => {
+    io.emit("getDataFromServer", `${socket.id}`)
     db.updateShoppingList(objectData.shoppingListId, objectData.shoppingList)
   });
   socket.on("getShoppingList", async (id: string) => {
@@ -21,6 +22,10 @@ io.on("connection", (socket: any) => {
   })
   socket.on("getShoppingListByEmail", async (email: string) => {
     db.getShoppingListByEmail(email)
+  })
+  socket.on("checkUserExist", async (email: string) => {
+    console.log('mgs',email);
+    db.checkUserExist(email)
   })
   socket.on("insertNewUser", async (msg: userProfileData) => {
     console.log('mgs',msg);
@@ -30,7 +35,6 @@ io.on("connection", (socket: any) => {
     db.getUserData(user)
   })
   socket.on("updateUserProfile", async (value:any) => {
-    // console.log('mgs', msg);
     db.updateUserData(value)
   })
   socket.on("scrap", async (msg: string) => {

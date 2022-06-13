@@ -1,5 +1,6 @@
 import emit from "./emit";
 import { Globals } from "./Globals";
+import { io } from "./ioSocket";
 import { userProfileData } from "./types";
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -10,6 +11,7 @@ const dbName = 'shoppingLists';
 
 export default class db {
   public static async updateShoppingList(shoppingListId: string, shoppingList: any) {
+
     // Use connect method to connect to the server
     await client.connect();
     console.log('Connected successfully to DB');
@@ -20,6 +22,7 @@ export default class db {
     collection.updateOne({shoppingListId} , newvalues, function (err: any, res: any) {
       if (err) throw err;
       console.log("1 shopping list updated");
+      // io.emit("getDataFromServer", 'test getting push data')
     });
     console.log('collection.find()', shoppingList);
     // the following code examples can be pasted here...
@@ -65,7 +68,7 @@ export default class db {
     console.log('Connected successfully to DB');
 
     const db = client.db("usersData");
-    db.collection('users').findOne({ email: email },
+    db.collection('users').findOne({ email: email.toLowerCase().trim() },
       (err: any, result: any) => {
         if (err) throw err;
         console.log(result);

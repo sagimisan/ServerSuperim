@@ -14,6 +14,7 @@ io.on("connection", (socket: any) => {
     db.addShopingList(msg)
   });
   socket.on("updateShopingList", async (objectData: any) => {
+    io.emit("getDataFromServer", `${socket.id}`)
     db.updateShoppingList(objectData.shoppingListId, objectData.shoppingList)
   });
   socket.on("getShoppingList", async (id: string) => {

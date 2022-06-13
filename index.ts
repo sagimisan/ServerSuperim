@@ -13,11 +13,17 @@ io.on("connection", (socket: any) => {
     console.log(msg);
     db.addShopingList(msg)
   });
+  socket.on("joinToRoom", async (shoppingListId: any) => {
+    // io.emit("joinToRoom", `${socket.id}`)
+    socket.join(shoppingListId)
+    socket.emit("getDataFromServer", `${socket.id}`)
+
+  });
   socket.on("updateShopingList", async (objectData: any) => {
-    io.emit("getDataFromServer", `${socket.id}`)
     db.updateShoppingList(objectData.shoppingListId, objectData.shoppingList)
   });
   socket.on("getShoppingList", async (id: string) => {
+    
     db.getShoppingList(id)
   })
   socket.on("getShoppingListByEmail", async (email: string) => {

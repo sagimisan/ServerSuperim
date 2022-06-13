@@ -22,7 +22,7 @@ export default class db {
     collection.updateOne({shoppingListId} , newvalues, function (err: any, res: any) {
       if (err) throw err;
       console.log("1 shopping list updated");
-      io.to(shoppingListId).emit("getDataFromServer", 'test getting push data')
+      // io.to(shoppingListId).emit("getDataFromServer", 'test getting push data')
     });
     console.log('shoppingList', shoppingList);
     // the following code examples can be pasted here...
@@ -49,7 +49,7 @@ export default class db {
     return 'done.';
 
   }
-  public static async getShoppingList(id: string) {
+  public static async getShoppingList(id: string,CB?:(msg:string)=>void) {
     console.log(id);
     await client.connect();
     console.log('Connected successfully to DB');
@@ -59,7 +59,8 @@ export default class db {
       (err: any, result: any) => {
         if (err) throw err;
         console.log(result);
-        emit("getShoppingList", result);
+        CB(result)
+        // emit("getShoppingList", result);
       });
   }
   public static async getShoppingListByEmail(email: string) {

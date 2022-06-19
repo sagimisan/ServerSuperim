@@ -15,16 +15,18 @@ io.on("connection", (socket: any) => {
   });
   socket.on("joinToRoom", async (shoppingListId: any) => {
     // io.emit("joinToRoom", `${socket.id}`)
+    console.log('joinToRoom',shoppingListId);
+    
     socket.join(shoppingListId)
-    socket.emit("getDataFromServer", `${socket.id}`)
+    // socket.emit("getDataFromServer", `${socket.id}`)
 
   });
   socket.on("updateShopingList", async (objectData: any) => {
     db.updateShoppingList(objectData.shoppingListId, objectData.shoppingList)
   });
-  socket.on("getShoppingList", async (id: string) => {
-    
-    db.getShoppingList(id)
+  socket.on("getShoppingList", async (id: string,CB?:(msg:string)=>void) => {
+    // CB('SUCCEED!!!')
+    db.getShoppingList(id,CB)
   })
   socket.on("getShoppingListByEmail", async (email: string) => {
     db.getShoppingListByEmail(email)

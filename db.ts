@@ -22,7 +22,7 @@ export default class db {
     collection.updateOne({shoppingListId} , newvalues, function (err: any, res: any) {
       if (err) throw err;
       console.log("1 shopping list updated");
-      // io.to(shoppingListId).emit("getDataFromServer", 'test getting push data')
+      io.to(shoppingListId).emit("getDataFromServer", shoppingList)
     });
     console.log('shoppingList', shoppingList);
     // the following code examples can be pasted here...

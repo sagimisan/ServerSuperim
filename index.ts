@@ -15,6 +15,8 @@ io.on("connection", (socket: any) => {
   });
   socket.on("joinToRoom", async (shoppingListId: any) => {
     // io.emit("joinToRoom", `${socket.id}`)
+    console.log('joinToRoom',shoppingListId);
+    
     socket.join(shoppingListId)
     // socket.emit("getDataFromServer", `${socket.id}`)
 

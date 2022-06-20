@@ -59,11 +59,11 @@ export default class db {
       (err: any, result: any) => {
         if (err) throw err;
         console.log(result);
-        CB(result)
+        CB(JSON.stringify(result))
         // emit("getShoppingList", result);
       });
   }
-  public static async getShoppingListByEmail(email: string) {
+  public static async getShoppingListByEmail(email: string,CB?:(msg:string)=>void) {
     console.log(email);
     await client.connect();
     console.log('Connected successfully to DB');
@@ -73,7 +73,8 @@ export default class db {
       (err: any, result: any) => {
         if (err) throw err;
         console.log(result);
-        emit("getShoppingListByEmail", result.shoppingListId);
+        CB(result.shoppingListId)
+        // emit("getShoppingListByEmail", result.shoppingListId);
       });
   }
   public static async checkUserExist(email: string) {

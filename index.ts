@@ -26,10 +26,12 @@ io.on("connection", (socket: any) => {
   });
   socket.on("getShoppingList", async (id: string,CB?:(msg:string)=>void) => {
     // CB('SUCCEED!!!')
+    console.log('is',id);
+    
     db.getShoppingList(id,CB)
   })
-  socket.on("getShoppingListByEmail", async (email: string) => {
-    db.getShoppingListByEmail(email)
+  socket.on("getShoppingListByEmail", async (email: string,CB?:(msg:string)=>void) => {
+    db.getShoppingListByEmail(email,CB)
   })
   socket.on("checkUserExist", async (email: string) => {
     console.log('mgs',email);

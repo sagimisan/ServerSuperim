@@ -96,7 +96,7 @@ export default class db {
     const collection = db.collection('users');
     collection.insertOne(value)
   }
-  public static async getUserData(user: userProfileData) {
+  public static async getUserData(user: userProfileData,CB?:(msg:string)=>void) {
     console.log('getUserData');
     
     await client.connect();
@@ -106,7 +106,8 @@ export default class db {
     db.collection('users').findOne({ email: user.email },
       (err: any, result: any) => {
         if (err) throw err;
-        emit("getUserData", result);
+        // emit("getUserData", result);
+        CB(JSON.stringify(result))
       })
   }
   public static async updateUserData(value: userProfileData[]) {

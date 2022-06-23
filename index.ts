@@ -41,8 +41,8 @@ io.on("connection", (socket: any) => {
     console.log('mgs',msg);
     db.insertNewUser(msg)
   })
-  socket.on("getUserData", async (user:userProfileData) => {    
-    db.getUserData(user)
+  socket.on("getUserData", async (user:userProfileData,CB?:(msg:string)=>void) => {    
+    db.getUserData(user,CB)
   })
   socket.on("updateUserProfile", async (value:any) => {
     db.updateUserData(value)

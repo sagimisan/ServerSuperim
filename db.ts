@@ -96,14 +96,14 @@ export default class db {
     const collection = db.collection('users');
     collection.insertOne(value)
   }
-  public static async getUserData(user: userProfileData,CB?:(msg:string)=>void) {
+  public static async getUserData(email: string,CB?:(msg:string)=>void) {
     console.log('getUserData');
     
     await client.connect();
     console.log('Connected successfully to DB');
 
     const db = client.db("usersData");
-    db.collection('users').findOne({ email: user.email },
+    db.collection('users').findOne({ email: email },
       (err: any, result: any) => {
         if (err) throw err;
         // emit("getUserData", result);

@@ -50,12 +50,26 @@ export default class db {
 
   }
   public static async getShoppingList(id: string,CB?:(msg:string)=>void) {
-    console.log(id);
+    console.log('id',id);
     await client.connect();
     console.log('Connected successfully to DB');
 
     const db = client.db("shoppingLists");
     db.collection('lists').findOne({ shoppingListId: id },
+      (err: any, result: any) => {
+        if (err) throw err;
+        console.log(result);
+        CB(JSON.stringify(result))
+        // emit("getShoppingList", result);
+      });
+  }
+  public static async getShoppingListsIDS(email: string,CB?:(msg:string)=>void) {
+    console.log('id',email);
+    await client.connect();
+    console.log('Connected successfully to DB');
+
+    const db = client.db("shoppingLists");
+    db.collection('lists').findOne({ email: email },
       (err: any, result: any) => {
         if (err) throw err;
         console.log(result);
@@ -107,18 +121,21 @@ export default class db {
       (err: any, result: any) => {
         if (err) throw err;
         // emit("getUserData", result);
+        console.log('here2',result);
+
         CB(JSON.stringify(result))
       })
   }
   public static async updateUserData(value: userProfileData[]) {
-    console.log('getUserData');
+    console.log('updateUserData');
+    console.log('value',value);
     
     await client.connect();
     console.log('Connected successfully to DB');
 
     var dbo = client.db("usersData");
     var myquery = value[0].email;
-    var newvalues = { $set: { name: value[1].name, hourPrice: value[1].hourPrice, shoppingListId: value[1].shoppingListId } };
+    var newvalues = { $set: { name: value[1].name, hourPrice: value[1].hourPrice, shoppingListId: value[1].shoppingListId,shoppingListsIDS: value[1].shoppingListsIDS } };
     dbo.collection("users").updateOne({ email: myquery }, newvalues, function (err: any, res: any) {
       if (err) throw err;
       console.log("1 document updated");

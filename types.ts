@@ -6,4 +6,5 @@ export interface userProfileData {
   rate: number;
   hourPrice:number;
   shoppingListId:string
+  shoppingListsIDS:string[]
 }

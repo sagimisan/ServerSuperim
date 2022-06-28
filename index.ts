@@ -41,10 +41,14 @@ io.on("connection", (socket: any) => {
     console.log('mgs',msg);
     db.insertNewUser(msg)
   })
-  socket.on("getUserData", async (email:string,CB?:(msg:string)=>void) => {    
+  socket.on("getUserData", async (email:string,CB?:(msg:string)=>void) => { 
+    console.log('here',);
+       
     db.getUserData(email,CB)
   })
   socket.on("updateUserProfile", async (value:any) => {
+    console.log('11');
+    
     db.updateUserData(value)
   })
   socket.on("scrap", async (msg: string) => {

@@ -38,13 +38,14 @@ export default class db {
     // // the following code examples can be pasted here...
     // return 'done.';
   }
-  public static async addShopingList(result: any) {
+  public static async addShopingList(result: any, CB?:(msg:string)=>void) {
     // Use connect method to connect to the server
     await client.connect();
     console.log('Connected successfully to DB');
     const db = client.db(dbName);
     const collection = db.collection('lists');
     collection.insertOne(result)
+    CB(JSON.stringify(result))
     // console.log('collection.find()', result);
     return 'done.';
 

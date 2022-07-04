@@ -46,10 +46,12 @@ io.on("connection", (socket: any) => {
        
     db.getUserData(email,CB)
   })
-  socket.on("updateUserProfile", async (value:any) => {
-    console.log('11');
-    
-    db.updateUserData(value)
+  socket.on("updateUserProfile", async (value:any) => {    
+    db.updateUserProfile(value)
+  })
+  socket.on("shareShoppingList", async (mail:any,CB?:(msg:string)=>void) => {
+    console.log('value',mail);
+    db.shareShoppingList(mail,CB)
   })
   socket.on("scrap", async (msg: string) => {
     // console.log(msg);

@@ -78,6 +78,19 @@ export default class db {
         // emit("getShoppingList", result);
       });
   }
+  public static async shareShoppingList(email: string,CB?:(msg:string)=>void) {
+    console.log('email',email);
+    await client.connect();
+    console.log('Connected successfully to DB');
+    const db = client.db("usersData");
+    db.collection('users').findOne({ email: email.toLowerCase().trim() },
+      (err: any, result: any) => {
+        if (err) throw err;
+        console.log('shareShoppingList result' , result);
+        CB(JSON.stringify(result))
+        // emit("getShoppingListByEmail", result.shoppingListId);
+      });
+  }
   public static async getShoppingListByEmail(email: string,CB?:(msg:string)=>void) {
     console.log(email);
     await client.connect();
@@ -127,8 +140,8 @@ export default class db {
         CB(JSON.stringify(result))
       })
   }
-  public static async updateUserData(value: userProfileData[]) {
-    console.log('updateUserData');
+  public static async updateUserProfile(value: userProfileData[]) {
+    console.log('updateUserProfile');
     console.log('value',value);
     
     await client.connect();

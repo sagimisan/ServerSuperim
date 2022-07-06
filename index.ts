@@ -21,8 +21,8 @@ io.on("connection", (socket: any) => {
     // socket.emit("getDataFromServer", `${socket.id}`)
 
   });
-  socket.on("updateShopingList", async (objectData: any) => {
-    db.updateShoppingList(objectData.shoppingListId, objectData.shoppingList)
+  socket.on("updateShoppingList", async (objectData: any, CB?:(msg:string)=>void) => {
+    db.updateShoppingList(objectData.shoppingListId, objectData.shoppingList,CB)
   });
   socket.on("getShoppingList", async (id: string,CB?:(msg:string)=>void) => {
     // CB('SUCCEED!!!')
@@ -46,8 +46,8 @@ io.on("connection", (socket: any) => {
        
     db.getUserData(email,CB)
   })
-  socket.on("updateUserProfile", async (value:any) => {    
-    db.updateUserProfile(value)
+  socket.on("updateUserProfile", async (value:any,CB?:(msg:string)=>void) => {    
+    db.updateUserProfile(value,CB)
   })
   socket.on("shareShoppingList", async (mail:any,CB?:(msg:string)=>void) => {
     console.log('value',mail);

@@ -10,23 +10,32 @@ const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology:
 const dbName = 'shoppingLists';
 
 export default class db {
-  public static async updateShoppingList(shoppingListId: string, shoppingList: any) {
+  public static async updateShoppingList(shoppingListId: string, shoppingList: any,CB?:(msg:string)=>void) {
 
     // Use connect method to connect to the server
     await client.connect();
     console.log('Connected successfully to DB');
-    console.log('shoppingListId ', shoppingListId, shoppingList);
+    console.log('shoppingListId ', shoppingListId);
+    console.log('shoppingList',shoppingList);
+    
     const db = client.db(dbName);
     const collection = db.collection('lists');
-    var newvalues = { $set: {shoppingList} };
-    collection.updateOne({shoppingListId} , newvalues, function (err: any, res: any) {
-      if (err) throw err;
-      console.log("1 shopping list updated");
-      io.to(shoppingListId).emit("getDataFromServer", shoppingList)
+    var newvalues = { $set: {shoppingList:shoppingList.shoppingList,title:shoppingList.title} };
+    console.log('newvalues',newvalues);
+    
+    collection.updateOne({shoppingListId:shoppingListId} , newvalues, function (err: any, res: any) {
+     
+      if (err) {
+        console.log('err',err);
+        
+        throw err};
+      // console.log("1 shopping list updated");
+      // io.to(shoppingListId).emit("getDataFromServer", shoppingList)
+      console.log('shoppingList', shoppingList);
+      // CB&&CB(shoppingList)
     });
-    console.log('shoppingList', shoppingList);
     // the following code examples can be pasted here...
-    return 'done.';
+    // return 'done.';
 
     // // Use connect method to connect to the server
     // await client.connect();
@@ -135,14 +144,12 @@ export default class db {
       (err: any, result: any) => {
         if (err) throw err;
         // emit("getUserData", result);
-        console.log('here2',result);
-
         CB(JSON.stringify(result))
       })
   }
-  public static async updateUserProfile(value: userProfileData[]) {
+  public static async updateUserProfile(value: userProfileData[],CB?:(msg:string)=>void) {
     console.log('updateUserProfile');
-    console.log('value',value);
+    console.log('value',value[1]);
     
     await client.connect();
     console.log('Connected successfully to DB');
@@ -153,6 +160,9 @@ export default class db {
     dbo.collection("users").updateOne({ email: myquery }, newvalues, function (err: any, res: any) {
       if (err) throw err;
       console.log("1 document updated");
+      console.log('newvalues',value[1]);
+      
+      CB&&CB(JSON.stringify(value[1]))
     });
   }
 }

@@ -30,9 +30,9 @@ export default class db {
         
         throw err};
       // console.log("1 shopping list updated");
-      // io.to(shoppingListId).emit("getDataFromServer", shoppingList)
+      io.to(shoppingListId).emit("getDataFromServer", shoppingList)
       console.log('shoppingList', shoppingList);
-      // CB&&CB(shoppingList)
+      CB&&CB(shoppingList)
     });
     // the following code examples can be pasted here...
     // return 'done.';

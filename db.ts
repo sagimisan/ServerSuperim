@@ -47,7 +47,7 @@ export default class db {
     // // the following code examples can be pasted here...
     // return 'done.';
   }
-  public static async addShopingList(result: any, CB?:(msg:string)=>void) {
+  public static async addShoppingList(result: any, CB?:(msg:string)=>void) {
     // Use connect method to connect to the server
     await client.connect();
     console.log('Connected successfully to DB');

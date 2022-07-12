@@ -9,9 +9,9 @@ io.on("connection", (socket: any) => {
   console.log("test");
   socket.emit('connection','connectSuccess')
   
-  socket.on("addShopingList", async (msg: any, CB?:(msg:string)=>void) => {
+  socket.on("addShoppingList", async (msg: any, CB?:(msg:string)=>void) => {
     console.log(msg);
-    db.addShopingList(msg, CB)
+    db.addShoppingList(msg, CB)
   });
   socket.on("joinToRoom", async (shoppingListId: any) => {
     // io.emit("joinToRoom", `${socket.id}`)

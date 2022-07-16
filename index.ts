@@ -22,6 +22,8 @@ io.on("connection", (socket: any) => {
 
   });
   socket.on("updateShoppingList", async (objectData: any, CB?:(msg:string)=>void) => {
+    console.log('objectData',objectData);
+    
     db.updateShoppingList(objectData.shoppingListId, objectData.shoppingList,CB)
   });
   socket.on("getShoppingList", async (id: string,CB?:(msg:string)=>void) => {

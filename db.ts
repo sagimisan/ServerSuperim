@@ -20,7 +20,7 @@ export default class db {
     
     const db = client.db(dbName);
     const collection = db.collection('lists');
-    var newvalues = { $set: {shoppingList:shoppingList.shoppingList,title:shoppingList.title} };
+    var newvalues = { $set: {shoppingList:shoppingList.shoppingList,title:shoppingList.title,} };
     console.log('newvalues',newvalues);
     
     collection.updateOne({shoppingListId:shoppingListId} , newvalues, function (err: any, res: any) {
@@ -161,6 +161,7 @@ export default class db {
       if (err) throw err;
       console.log("1 document updated");
       console.log('newvalues',value[1]);
+      console.log('11111111111111111111111111111111',CB);
       
       CB&&CB(JSON.stringify(value[1]))
     });

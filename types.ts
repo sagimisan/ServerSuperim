@@ -8,3 +8,16 @@ export interface userProfileData {
   shoppingListId:string
   shoppingListsIDS:string[]
 }
+
+export type productData={
+  price:number,
+  department:number,
+  side:number,
+  row:number,
+  flowr:number,
+      name: string;
+  quantity: number;
+  // id: number;
+  isSelected: boolean;
+  picture?: string;
+}
